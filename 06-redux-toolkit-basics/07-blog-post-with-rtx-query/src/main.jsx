@@ -1,0 +1,24 @@
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
+import "./index.css";
+import { store } from "./app/store.js";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import { extendedApiSlice } from "./features/posts/postsSlice.js";
+import { userApiSlice } from "./features/users/usersSlice.js";
+
+//store.dispatch(fetchPosts());
+store.dispatch(extendedApiSlice.endpoints.getPosts.initiate());
+// store.dispatch(fetchUsers());
+store.dispatch(userApiSlice.endpoints.getUsers.initiate());
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+  </React.StrictMode>
+);
